@@ -1,0 +1,187 @@
+/* Pages with PageHeader should start right after navbar */
+.articles-page,
+.projects-page,
+.coaching-page,
+.challenges-page,
+.dashboard-page,
+.forum-page,
+.admin-page,
+.donations-page {
+  margin-top: -80px;
+  padding-top: 0;
+}
+
+.page-header {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  margin-top: 0;
+  padding-top: var(--spacing-2xl);
+  overflow: hidden;
+}
+
+.page-header-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.page-header-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.page-header-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Ensure page header starts right after navbar with no gap */
+.articles-page > .page-header,
+.projects-page > .page-header,
+.coaching-page > .page-header,
+.challenges-page > .page-header,
+.dashboard-page > .page-header,
+.forum-page > .page-header,
+.admin-page > .page-header,
+.donations-page > .page-header {
+  margin-top: 80px;
+  padding-top: var(--spacing-2xl);
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.page-header-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-header-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00d4ff;
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+.page-header-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  font-weight: 400;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.page-header-indicators {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-sm);
+  z-index: 10;
+}
+
+.page-header-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  outline: none;
+}
+
+.page-header-indicator:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.page-header-indicator.active {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.9);
+  width: 32px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    min-height: 280px;
+    padding: var(--spacing-xl) var(--spacing-md);
+    margin-top: 0;
+  }
+
+  .page-header-title {
+    font-size: 2rem;
+  }
+
+  .page-header-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    min-height: 240px;
+    padding: var(--spacing-lg) var(--spacing-sm);
+    margin-top: 0;
+  }
+
+  .page-header-title {
+    font-size: 1.75rem;
+  }
+
+  .page-header-subtitle {
+    font-size: 0.9375rem;
+  }
+}
+
+/* Page Actions */
+.page-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: var(--spacing-lg) 0;
+  padding-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .page-actions {
+    margin: var(--spacing-md) 0;
+  }
+}
+
