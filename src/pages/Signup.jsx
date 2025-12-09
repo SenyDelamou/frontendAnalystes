@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import ExpertiseQuestionnaire from '../components/ExpertiseQuestionnaire'
-import PaymentModal from '../components/PaymentModal'
 import './Auth.css'
 
 const Signup = () => {
@@ -17,13 +16,8 @@ const Signup = () => {
   const [showQuestionnaire, setShowQuestionnaire] = useState(false)
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState(null)
   const [pendingExpertiseLevel, setPendingExpertiseLevel] = useState('')
-  const [showPaymentModal, setShowPaymentModal] = useState(false)
-  const [paymentData, setPaymentData] = useState(null)
   const { login } = useAuth()
   const navigate = useNavigate()
-
-  // Montant de la prime d'adhésion en GNF
-  const MEMBERSHIP_FEE = 20000
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -84,19 +78,11 @@ const Signup = () => {
       return
     }
 
-    // Ouvrir le modal de paiement avant de créer le compte
-    setShowPaymentModal(true)
+    // Créer directement le compte sans paiement
+    createUserAccount()
   }
 
-  const handlePaymentSuccess = (paymentInfo) => {
-    setPaymentData(paymentInfo)
-    setShowPaymentModal(false)
-    
-    // Maintenant créer le compte après paiement réussi
-    createUserAccount(paymentInfo)
-  }
-
-  const createUserAccount = (paymentInfo) => {
+  const createUserAccount = () => {
     // Check if admin email (for demo purposes)
     const isAdminEmail = formData.email.toLowerCase().includes('admin') || formData.email === 'admin@dataanalysts.gn'
     const userData = {
@@ -108,22 +94,13 @@ const Signup = () => {
       role: isAdminEmail ? 'admin' : 'user',
       expertiseLevel: formData.expertiseLevel || 'Débutant',
       questionnaireAnswers: questionnaireAnswers || null,
-      joinedAt: new Date().toISOString(),
-      paymentStatus: 'paid',
-      paymentData: paymentInfo,
-      membershipFee: MEMBERSHIP_FEE,
-      membershipDate: new Date().toISOString()
+      joinedAt: new Date().toISOString()
     }
 
-    // Sauvegarder les données de paiement dans localStorage (pour la démo)
-    const payments = JSON.parse(localStorage.getItem('payments') || '[]')
-    payments.push({
-      userId: userData.id,
-      ...paymentInfo,
-      userEmail: formData.email,
-      userName: formData.name
-    })
-    localStorage.setItem('payments', JSON.stringify(payments))
+    // Sauvegarder l'utilisateur dans localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]')
+    users.push(userData)
+    localStorage.setItem('users', JSON.stringify(users))
 
     login(userData)
     navigate('/dashboard')
@@ -131,17 +108,10 @@ const Signup = () => {
 
   const handleGoogleSignup = () => {
     setError('')
-    // Pour Google Signup, on doit aussi payer la prime d'adhésion
     // Note: Dans une vraie app, on récupérerait les données Google d'abord
-    // Pour la démo, on simule directement le paiement puis la création du compte
-    setShowPaymentModal(true)
-  }
-
-  const handleGooglePaymentSuccess = (paymentInfo) => {
-    setPaymentData(paymentInfo)
-    setShowPaymentModal(false)
+    // Pour la démo, on simule directement la création du compte
     
-    // Créer le compte Google après paiement
+    // Créer le compte Google directement
     const userData = {
       id: Date.now(),
       name: 'Utilisateur Google',
@@ -149,22 +119,13 @@ const Signup = () => {
       avatar: 'https://ui-avatars.com/api/?name=Google+User&background=667eea&color=fff',
       bio: '',
       expertiseLevel: 'Débutant',
-      joinedAt: new Date().toISOString(),
-      paymentStatus: 'paid',
-      paymentData: paymentInfo,
-      membershipFee: MEMBERSHIP_FEE,
-      membershipDate: new Date().toISOString()
+      joinedAt: new Date().toISOString()
     }
 
-    // Sauvegarder les données de paiement
-    const payments = JSON.parse(localStorage.getItem('payments') || '[]')
-    payments.push({
-      userId: userData.id,
-      ...paymentInfo,
-      userEmail: userData.email,
-      userName: userData.name
-    })
-    localStorage.setItem('payments', JSON.stringify(payments))
+    // Sauvegarder l'utilisateur dans localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]')
+    users.push(userData)
+    localStorage.setItem('users', JSON.stringify(users))
 
     login(userData)
     navigate('/dashboard')
@@ -181,10 +142,6 @@ const Signup = () => {
           </div>
           <h1>Rejoignez la communauté</h1>
           <p>Créez votre compte et connectez-vous avec les data analysts de Guinée</p>
-          <div className="membership-fee-badge">
-            <span className="fee-icon">💰</span>
-            <span>Prime d'adhésion : <strong>20,000 GNF</strong> (unique)</span>
-          </div>
         </div>
 
         {error && (
@@ -322,24 +279,6 @@ const Signup = () => {
           onCancel={handleQuestionnaireCancel}
         />
       )}
-
-      <PaymentModal
-        isOpen={showPaymentModal}
-        onClose={() => {
-          setShowPaymentModal(false)
-          // Si l'utilisateur annule le paiement Google, on ne fait rien
-        }}
-        onSuccess={(paymentInfo) => {
-          // Vérifier si c'est un paiement Google ou normal
-          if (formData.email) {
-            handlePaymentSuccess(paymentInfo)
-          } else {
-            handleGooglePaymentSuccess(paymentInfo)
-          }
-        }}
-        amount={MEMBERSHIP_FEE}
-        currency="GNF"
-      />
     </div>
   )
 }
