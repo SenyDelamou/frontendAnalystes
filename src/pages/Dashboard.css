@@ -123,6 +123,8 @@
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-2xl);
   position: relative;
+  opacity: 1;
+  visibility: visible;
 }
 
 .dashboard-badges-section {
@@ -297,6 +299,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-lg);
+  opacity: 1;
+  visibility: visible;
 }
 
 .action-card {
