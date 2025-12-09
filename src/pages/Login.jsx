@@ -171,16 +171,27 @@ const Login = () => {
           </div>
 
           <div className="form-group checkbox-group">
-            <label className="checkbox-label">
+            <label className="checkbox-label" htmlFor="rememberMe">
               <input
                 type="checkbox"
+                id="rememberMe"
                 name="rememberMe"
                 checked={formData.rememberMe}
                 onChange={handleChange}
                 className="checkbox-input"
+                aria-label="Se souvenir de moi pour les prochaines connexions"
               />
-              <span className="checkbox-custom"></span>
-              <span className="checkbox-text">Se souvenir de moi</span>
+              <span className="checkbox-custom" aria-hidden="true">
+                {formData.rememberMe && (
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </span>
+              <span className="checkbox-text">
+                <span className="checkbox-text-main">Se souvenir de moi</span>
+                <span className="checkbox-text-hint">Vos identifiants seront sauvegardés</span>
+              </span>
             </label>
           </div>
 

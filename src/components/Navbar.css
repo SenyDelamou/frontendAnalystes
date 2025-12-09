@@ -814,7 +814,7 @@
 
 .navbar-mobile-menu::-webkit-scrollbar {
   width: 6px;
-}
+  }
 
 .navbar-mobile-menu::-webkit-scrollbar-track {
   background: transparent;
@@ -835,7 +835,7 @@
     gap: clamp(2px, 0.2vw, 3px);
     padding: clamp(5px, 0.6vw, 6px);
   }
-}
+  }
 
 @media (max-width: 1024px) {
   .navbar-nav-container {
