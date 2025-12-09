@@ -118,7 +118,7 @@
 
 .status-recruiting:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
 }
 
 .status-active {
@@ -154,7 +154,7 @@
   width: 32px;
   height: 32px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -162,14 +162,14 @@
   font-weight: 700;
   font-size: 0.875rem;
   border: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover .project-owner img,
 .project-card:hover .project-owner span {
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .project-card h3 {
@@ -203,23 +203,23 @@
 .skill-tag {
   padding: 0.5rem 1rem;
   background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.12) 0%, 
+    rgba(102, 126, 234, 0.12) 0%, 
     rgba(147, 51, 234, 0.12) 100%);
   color: var(--primary);
   border-radius: var(--radius-full);
   font-size: 0.8125rem;
   font-weight: 600;
-  border: 2px solid rgba(59, 130, 246, 0.2);
+  border: 2px solid rgba(102, 126, 234, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }
 
 .skill-tag:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-color: transparent;
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .project-footer {
@@ -231,8 +231,8 @@
 }
 
 .project-members-link {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.2);
   font-weight: 700;
   color: var(--primary);
   cursor: pointer;
@@ -253,11 +253,11 @@
 }
 
 .project-members-link:hover:not(:disabled) {
-  background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-color: transparent;
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .project-members-link:disabled {
