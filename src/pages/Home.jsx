@@ -511,12 +511,89 @@ const Home = () => {
       <section className="cta-section">
         <div className="container">
           <div className="cta-content">
-            <h2>Prêt à rejoindre la communauté ?</h2>
-            <p>Connectez-vous avec les data analysts de Guinée et développez vos compétences ensemble</p>
-            {!isAuthenticated && (
-              <Link to="/signup" className="btn btn-primary btn-large">
-                Créer un compte gratuit
-              </Link>
+            <div className="cta-icon-wrapper">
+              <div className="cta-icon">
+                {isAuthenticated ? (
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="3" width="7" height="7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <rect x="14" y="3" width="7" height="7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <rect x="3" y="14" width="7" height="7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <rect x="14" y="14" width="7" height="7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </div>
+            </div>
+            {isAuthenticated ? (
+              <>
+                <h2 className="cta-title">Bienvenue dans la communauté !</h2>
+                <p className="cta-description">
+                  Continuez à développer vos compétences avec les data analysts de Guinée. Explorez les ressources, participez aux défis et partagez vos connaissances.
+                </p>
+                <div className="cta-actions">
+                  <Link to="/dashboard" className="btn btn-cta-primary">
+                    <span>Accéder au dashboard</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                  <Link to="/articles" className="btn btn-cta-secondary">
+                    Explorer les ressources
+                  </Link>
+                </div>
+                <div className="cta-features">
+                  <div className="cta-feature-item">
+                    <span className="cta-feature-icon">✓</span>
+                    <span>Accès complet</span>
+                  </div>
+                  <div className="cta-feature-item">
+                    <span className="cta-feature-icon">✓</span>
+                    <span>Projets collaboratifs</span>
+                  </div>
+                  <div className="cta-feature-item">
+                    <span className="cta-feature-icon">✓</span>
+                    <span>Ressources illimitées</span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="cta-title">Prêt à rejoindre la communauté ?</h2>
+                <p className="cta-description">
+                  Connectez-vous avec les data analysts de Guinée et développez vos compétences ensemble. Rejoignez une communauté active et passionnée par l'analyse de données.
+                </p>
+                <div className="cta-actions">
+                  <Link to="/signup" className="btn btn-cta-primary">
+                    <span>Créer un compte gratuit</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                  <Link to="/login" className="btn btn-cta-secondary">
+                    Se connecter
+                  </Link>
+                </div>
+                <div className="cta-features">
+                  <div className="cta-feature-item">
+                    <span className="cta-feature-icon">✓</span>
+                    <span>100% Gratuit</span>
+                  </div>
+                  <div className="cta-feature-item">
+                    <span className="cta-feature-icon">✓</span>
+                    <span>Communauté active</span>
+                  </div>
+                  <div className="cta-feature-item">
+                    <span className="cta-feature-icon">✓</span>
+                    <span>Ressources illimitées</span>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
