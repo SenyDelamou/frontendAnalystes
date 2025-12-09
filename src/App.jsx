@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
@@ -5,6 +6,7 @@ import { FavoritesProvider } from './context/FavoritesContext'
 import { BadgesProvider } from './context/BadgesContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import SplashScreen from './components/SplashScreen'
 import Home from './pages/Home'
 import Articles from './pages/Articles'
 import ArticleDetail from './pages/ArticleDetail'
@@ -105,14 +107,23 @@ function AppContent() {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true)
+
+  const handleSplashFinish = () => {
+    setShowSplash(false)
+  }
+
   return (
     <ThemeProvider>
       <AuthProvider>
         <FavoritesProvider>
           <BadgesProvider>
-            <Router>
-              <AppContent />
-            </Router>
+            {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
+            {!showSplash && (
+              <Router>
+                <AppContent />
+              </Router>
+            )}
           </BadgesProvider>
         </FavoritesProvider>
       </AuthProvider>

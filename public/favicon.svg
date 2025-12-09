@@ -5,10 +5,9 @@
   <path d="M6 14L16 19L26 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <defs>
     <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#3b82f6"/>
-      <stop offset="50%" stop-color="#2563eb"/>
-      <stop offset="100%" stop-color="#1d4ed8"/>
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="50%" stop-color="#764ba2"/>
+      <stop offset="100%" stop-color="#667eea"/>
     </linearGradient>
   </defs>
 </svg>
-
