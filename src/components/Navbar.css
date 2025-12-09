@@ -11,22 +11,16 @@
 .navbar-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--spacing-xl);
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  padding: 0 clamp(var(--spacing-sm), 2vw, var(--spacing-xl));
+  display: flex;
   align-items: center;
-  height: 80px;
-  gap: var(--spacing-lg);
+  justify-content: space-between;
+  height: clamp(65px, 10vw, 80px);
+  gap: clamp(var(--spacing-xs), 1.5vw, var(--spacing-lg));
   position: relative;
   width: 100%;
   box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .navbar-container {
-    grid-template-columns: auto 1fr auto auto;
-    gap: var(--spacing-sm);
-  }
+  flex-wrap: nowrap;
 }
 
 .navbar-brand {
@@ -82,22 +76,24 @@
 .navbar-nav-container {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: clamp(2px, 0.3vw, 4px);
   background: rgba(31, 41, 55, 0.5);
-  padding: 8px;
-  border-radius: 16px;
+  padding: clamp(6px, 0.8vw, 8px);
+  border-radius: clamp(12px, 1.5vw, 16px);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
   max-width: 100%;
   margin: 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow-x: auto;
   overflow-y: hidden;
   flex-wrap: nowrap;
-  min-width: 0;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  transition: all 0.3s ease;
 }
 
 .navbar-nav-container::-webkit-scrollbar {
@@ -113,15 +109,17 @@
 .navbar-link {
   color: white;
   font-weight: 500;
-  padding: 10px clamp(12px, 1.5vw, 24px);
-  border-radius: 10px;
-  transition: all 0.2s;
+  padding: clamp(8px, 1vw, 10px) clamp(10px, 1.2vw, 24px);
+  border-radius: clamp(8px, 1vw, 10px);
+  transition: all 0.2s ease;
   text-decoration: none;
-  font-size: clamp(0.8125rem, 0.8vw + 0.5rem, 0.9375rem);
+  font-size: clamp(0.75rem, 0.8vw + 0.5rem, 0.9375rem);
   white-space: nowrap;
   position: relative;
   flex-shrink: 0;
   min-width: fit-content;
+  display: inline-flex;
+  align-items: center;
 }
 
 .navbar-link:hover {
@@ -136,12 +134,13 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: clamp(8px, 1vw, var(--spacing-md));
+  gap: clamp(6px, 1vw, var(--spacing-md));
   flex-shrink: 0;
   min-width: 0;
   z-index: 1;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
+  transition: all 0.3s ease;
 }
 
 .theme-toggle,
@@ -195,16 +194,16 @@
 .navbar-action-btn {
   display: flex;
   align-items: center;
-  gap: clamp(6px, 0.8vw, 8px);
-  padding: clamp(10px, 1.2vw, 12px) clamp(16px, 2vw, 24px);
+  gap: clamp(4px, 0.8vw, 8px);
+  padding: clamp(8px, 1vw, 12px) clamp(12px, 1.5vw, 24px);
   background: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
+  border-radius: clamp(10px, 1.2vw, 12px);
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s;
-  font-size: clamp(0.8125rem, 0.8vw + 0.5rem, 0.9375rem);
+  transition: all 0.2s ease;
+  font-size: clamp(0.75rem, 0.8vw + 0.5rem, 0.9375rem);
   white-space: nowrap;
   flex-shrink: 0;
   min-width: fit-content;
@@ -795,87 +794,53 @@
 
 /* Responsive - Utilisation de clamp pour une adaptation automatique */
 @media (max-width: 1200px) {
-  .navbar-container {
-    padding: 0 var(--spacing-lg);
-    gap: var(--spacing-md);
-  }
-
   .navbar-nav-container {
-    gap: 2px;
-    padding: 6px;
-  }
-
-  .brand-text {
-    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    gap: clamp(2px, 0.2vw, 3px);
+    padding: clamp(5px, 0.6vw, 6px);
   }
 }
 
 @media (max-width: 1024px) {
-  .navbar-container {
-    gap: var(--spacing-md);
-  }
-
   .navbar-nav-container {
-    gap: 2px;
-    padding: 6px;
-  }
-
-  .brand-subtext {
-    font-size: clamp(0.625rem, 0.8vw, 0.6875rem);
+    gap: clamp(1px, 0.2vw, 2px);
+    padding: clamp(4px, 0.5vw, 6px);
   }
 }
 
 @media (max-width: 900px) {
-  .navbar-container {
-    padding: 0 var(--spacing-md);
-    gap: var(--spacing-sm);
-  }
-
   .navbar-nav-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 6px;
+    padding: clamp(4px, 0.5vw, 6px);
+    flex: 0 1 auto;
+    max-width: calc(100vw - 300px);
   }
 
   .navbar-nav-container::-webkit-scrollbar {
     display: none;
   }
 
-  .brand-icon-container {
-    width: clamp(40px, 5vw, 44px);
-    height: clamp(40px, 5vw, 44px);
-  }
-
-  .brand-icon {
-    width: clamp(22px, 2.5vw, 24px);
-    height: clamp(22px, 2.5vw, 24px);
-  }
-
-  .brand-text-container {
-    min-width: 0;
-  }
-
   .navbar-actions {
-    gap: var(--spacing-sm);
+    gap: clamp(4px, 0.8vw, var(--spacing-sm));
   }
 }
 
 @media (max-width: 768px) {
   .navbar-container {
-    padding: 0 var(--spacing-md);
-    height: clamp(65px, 9vw, 70px);
-    gap: var(--spacing-sm);
-    grid-template-columns: auto 1fr auto auto;
+    padding: 0 clamp(var(--spacing-xs), 1.5vw, var(--spacing-md));
+    height: clamp(60px, 9vw, 70px);
+    gap: clamp(var(--spacing-xs), 1vw, var(--spacing-sm));
+    flex-wrap: nowrap;
   }
 
   .navbar-toggle {
     display: flex;
-    order: 3;
     flex-shrink: 0;
     width: clamp(36px, 5vw, 40px);
     height: clamp(36px, 5vw, 40px);
+    order: 3;
   }
 
   .navbar-nav-container {
@@ -884,11 +849,11 @@
 
   .navbar-actions {
     display: flex;
-    order: 2;
     margin-left: auto;
-    gap: var(--spacing-sm);
+    gap: clamp(4px, 1vw, var(--spacing-sm));
     flex-shrink: 0;
     flex-wrap: nowrap;
+    order: 2;
   }
 
   .notification-button {
@@ -922,9 +887,9 @@
 
   .navbar-brand {
     order: 1;
-    flex-shrink: 1;
+    flex: 1 1 auto;
     min-width: 0;
-    max-width: calc(100% - 200px);
+    max-width: calc(100% - clamp(180px, 30vw, 220px));
   }
 
   .brand-icon-container {
@@ -1031,31 +996,17 @@
 
 @media (max-width: 640px) {
   .navbar-container {
-    padding: 0 var(--spacing-sm);
-    height: 65px;
-    gap: var(--spacing-xs);
+    padding: 0 clamp(var(--spacing-xs), 1.2vw, var(--spacing-sm));
+    height: clamp(60px, 10vw, 65px);
+    gap: clamp(4px, 0.8vw, var(--spacing-xs));
   }
 
   .navbar-actions {
-    gap: var(--spacing-xs);
+    gap: clamp(4px, 0.8vw, var(--spacing-xs));
   }
 
-  .brand-text {
-    font-size: 1rem;
-  }
-
-  .brand-subtext {
-    font-size: 0.625rem;
-  }
-
-  .brand-icon-container {
-    width: 40px;
-    height: 40px;
-  }
-
-  .brand-icon {
-    width: 22px;
-    height: 22px;
+  .navbar-brand {
+    max-width: calc(100% - clamp(160px, 28vw, 200px));
   }
 
   .notification-button {
@@ -1082,38 +1033,21 @@
 
 @media (max-width: 480px) {
   .navbar-container {
-    padding: 0 var(--spacing-xs);
-    height: 60px;
-    gap: var(--spacing-xs);
+    padding: 0 clamp(8px, 1vw, var(--spacing-xs));
+    height: clamp(58px, 9vw, 60px);
+    gap: clamp(4px, 0.8vw, var(--spacing-xs));
   }
 
   .brand-text-container {
     display: none;
   }
 
-  .brand-icon-container {
-    width: 36px;
-    height: 36px;
-  }
-
-  .brand-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .navbar-toggle {
-    padding: 6px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .navbar-toggle span {
-    width: 20px;
-    height: 2.5px;
+  .navbar-brand {
+    max-width: calc(100% - clamp(140px, 25vw, 180px));
   }
 
   .navbar-actions {
-    gap: 6px;
+    gap: clamp(4px, 0.8vw, 6px);
   }
 
   .notification-button {
@@ -1230,30 +1164,13 @@
 
 @media (max-width: 360px) {
   .navbar-container {
-    height: 58px;
-    padding: 0 8px;
-    gap: 4px;
+    height: clamp(56px, 8vw, 58px);
+    padding: 0 clamp(6px, 1vw, 8px);
+    gap: clamp(3px, 0.6vw, 4px);
   }
 
-  .brand-icon-container {
-    width: 32px;
-    height: 32px;
-  }
-
-  .brand-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .navbar-toggle {
-    width: 32px;
-    height: 32px;
-    padding: 4px;
-  }
-
-  .navbar-toggle span {
-    width: 18px;
-    height: 2px;
+  .navbar-brand {
+    max-width: calc(100% - clamp(120px, 22vw, 160px));
   }
 
   .notification-button {
