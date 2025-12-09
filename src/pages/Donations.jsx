@@ -5,7 +5,7 @@ import PageHeader from '../components/PageHeader'
 import './Donations.css'
 
 const Donations = () => {
-  const { isAuthenticated, user } = useAuth()
+  const { isAuthenticated, user, isAdmin } = useAuth()
   const [donationAmount, setDonationAmount] = useState('')
   const [selectedAmount, setSelectedAmount] = useState(null)
   const [customAmount, setCustomAmount] = useState('')
@@ -201,6 +201,34 @@ const Donations = () => {
                 </div>
 
                 {/* Informations du donateur */}
+                <div className="donor-info-fields">
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Nom complet *</label>
+                      <input
+                        type="text"
+                        value={donorName}
+                        onChange={(e) => setDonorName(e.target.value)}
+                        required={!isAnonymous}
+                        disabled={isAnonymous}
+                        placeholder={isAnonymous ? "Don anonyme" : "Votre nom"}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Email *</label>
+                      <input
+                        type="email"
+                        value={donorEmail}
+                        onChange={(e) => setDonorEmail(e.target.value)}
+                        required={!isAnonymous}
+                        disabled={isAnonymous}
+                        placeholder={isAnonymous ? "Don anonyme" : "votre@email.com"}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Option don anonyme */}
                 <div className="form-group">
                   <label className="checkbox-label">
                     <input
@@ -213,33 +241,6 @@ const Donations = () => {
                     <span className="checkbox-text">Faire un don anonyme</span>
                   </label>
                 </div>
-
-                {!isAnonymous && (
-                  <div className="donor-info-fields">
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label>Nom complet *</label>
-                        <input
-                          type="text"
-                          value={donorName}
-                          onChange={(e) => setDonorName(e.target.value)}
-                          required={!isAnonymous}
-                          placeholder="Votre nom"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Email *</label>
-                        <input
-                          type="email"
-                          value={donorEmail}
-                          onChange={(e) => setDonorEmail(e.target.value)}
-                          required={!isAnonymous}
-                          placeholder="votre@email.com"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
 
                 {/* Message optionnel */}
                 <div className="form-group">
@@ -271,24 +272,26 @@ const Donations = () => {
 
           {/* Section latérale - Statistiques et dons récents */}
           <div className="donations-sidebar">
-            {/* Statistiques */}
-            <div className="stats-card card">
-              <h3>📊 Statistiques des dons</h3>
-              <div className="stats-grid">
-                <div className="stat-item">
-                  <div className="stat-value">{formatAmount(donationStats.total)}</div>
-                  <div className="stat-label">Total collecté</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-value">{donationStats.count}</div>
-                  <div className="stat-label">Nombre de dons</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-value">{formatAmount(donationStats.thisMonth)}</div>
-                  <div className="stat-label">Ce mois-ci</div>
+            {/* Statistiques - Visible uniquement pour les admins */}
+            {isAdmin && (
+              <div className="stats-card card">
+                <h3>📊 Statistiques des dons</h3>
+                <div className="stats-grid">
+                  <div className="stat-item">
+                    <div className="stat-value">{formatAmount(donationStats.total)}</div>
+                    <div className="stat-label">Total collecté</div>
+                  </div>
+                  <div className="stat-item">
+                    <div className="stat-value">{donationStats.count}</div>
+                    <div className="stat-label">Nombre de dons</div>
+                  </div>
+                  <div className="stat-item">
+                    <div className="stat-value">{formatAmount(donationStats.thisMonth)}</div>
+                    <div className="stat-label">Ce mois-ci</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Dons récents */}
             {recentDonations.length > 0 && (

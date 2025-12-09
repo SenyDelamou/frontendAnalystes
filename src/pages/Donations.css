@@ -373,6 +373,18 @@
   font-size: 1.125rem;
 }
 
+.donor-info-fields input:disabled {
+  background-color: var(--gray-50);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.donor-info-fields input:disabled::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
 .donor-info-fields {
   margin-top: var(--spacing-md);
   padding: var(--spacing-lg);

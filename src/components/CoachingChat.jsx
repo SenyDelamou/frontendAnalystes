@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../context/AuthContext'
+import VideoCall from './VideoCall'
 import './CoachingChat.css'
 
 const CoachingChat = ({ request, onClose }) => {
@@ -9,6 +10,7 @@ const CoachingChat = ({ request, onClose }) => {
   const [isRecording, setIsRecording] = useState(false)
   const [audioBlob, setAudioBlob] = useState(null)
   const [audioUrl, setAudioUrl] = useState(null)
+  const [showVideoCall, setShowVideoCall] = useState(false)
   const messagesEndRef = useRef(null)
   const mediaRecorderRef = useRef(null)
   const audioChunksRef = useRef([])
@@ -151,11 +153,24 @@ const CoachingChat = ({ request, onClose }) => {
               </p>
             </div>
           </div>
-          <button className="chat-close-btn" onClick={onClose} aria-label="Fermer le chat">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+          <div className="chat-header-actions">
+            <button
+              className="chat-video-btn"
+              onClick={() => setShowVideoCall(true)}
+              title="Appel vidéo"
+              aria-label="Démarrer un appel vidéo"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2"/>
+              </svg>
+            </button>
+            <button className="chat-close-btn" onClick={onClose} aria-label="Fermer le chat">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div className="chat-messages">
@@ -255,6 +270,15 @@ const CoachingChat = ({ request, onClose }) => {
           </div>
         </form>
       </div>
+
+      {/* Video Call Modal */}
+      {showVideoCall && (
+        <VideoCall
+          request={request}
+          otherUser={otherUser}
+          onClose={() => setShowVideoCall(false)}
+        />
+      )}
     </div>
   )
 }
