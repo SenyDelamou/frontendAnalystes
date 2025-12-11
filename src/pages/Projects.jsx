@@ -270,11 +270,11 @@ const Projects = () => {
                     {project.status === 'completed' && '✅ Terminé'}
                   </span>
                 </div>
-                <div className="project-owner">
+                <div className="project-owner" title={project.owner.name}>
                   {project.owner.avatar ? (
                     <img src={project.owner.avatar} alt={project.owner.name} />
                   ) : (
-                    <span>{project.owner.name.charAt(0)}</span>
+                    <span>{project.owner.name.charAt(0).toUpperCase()}</span>
                   )}
                   <span>{project.owner.name}</span>
                 </div>

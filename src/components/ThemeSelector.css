@@ -1,0 +1,267 @@
+.theme-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-selector-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(32px, 4vw, 40px);
+  height: clamp(32px, 4vw, 40px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: clamp(10px, 1.2vw, 12px);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  min-width: clamp(32px, 4vw, 40px);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-selector-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.theme-selector-button:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+.theme-selector-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.theme-selector-button:active {
+  transform: translateY(0);
+}
+
+.theme-selector-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.theme-selector-button:hover .theme-selector-icon {
+  transform: rotate(15deg);
+}
+
+.theme-selector-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+  animation: themeDropdownFadeIn 0.2s ease-out;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .theme-selector-dropdown {
+  background: #1f2937;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes themeDropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.theme-selector-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .theme-selector-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: #111827;
+  color: var(--text-dark-secondary);
+}
+
+.theme-selector-options {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-selector-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
+
+.theme-selector-option:hover {
+  background: var(--gray-100);
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .theme-selector-option {
+  color: var(--text-dark-primary);
+}
+
+[data-theme="dark"] .theme-selector-option:hover {
+  background: #374151;
+}
+
+.theme-selector-option.active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .theme-selector-option.active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  color: var(--primary-light);
+}
+
+.theme-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.theme-selector-option:hover .theme-option-icon {
+  transform: scale(1.1);
+}
+
+.theme-option-name {
+  flex: 1;
+}
+
+.theme-option-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+  animation: checkFadeIn 0.2s ease-out;
+}
+
+[data-theme="dark"] .theme-option-check {
+  color: var(--primary-light);
+}
+
+@keyframes checkFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.theme-selector-info {
+  padding: 10px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--bg-secondary);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .theme-selector-info {
+  border-top-color: rgba(255, 255, 255, 0.1);
+  background: #111827;
+  color: var(--text-dark-secondary);
+}
+
+.theme-info-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-info-text::before {
+  content: 'ℹ️';
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .theme-selector-dropdown {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+  }
+
+  .theme-selector-option {
+    padding: 10px 14px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Animation de transition de thème */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Réduire les animations pour les utilisateurs qui préfèrent moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .theme-selector-button,
+  .theme-selector-option,
+  .theme-option-icon {
+    transition: none;
+  }
+
+  .theme-selector-dropdown {
+    animation: none;
+  }
+}
+

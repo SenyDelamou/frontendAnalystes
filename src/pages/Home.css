@@ -91,6 +91,10 @@
   background: var(--bg-primary);
 }
 
+[data-theme="dark"] .stats-section {
+  background: var(--bg-secondary);
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -113,12 +117,16 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 16px;
   background: var(--bg-primary);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
+}
+
+[data-theme="dark"] .stat-card {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
 }
 
 .stat-card::before {
@@ -550,11 +558,15 @@
   scroll-snap-align: start;
   position: relative;
   background: var(--bg-primary);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
-  box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .testimonial-card {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
 }
 
 .testimonial-card::before {
@@ -575,10 +587,13 @@
 
 .testimonial-card:hover {
   transform: translateY(-6px);
-  box-shadow: 
-    0 12px 32px rgba(0, 0, 0, 0.1),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-  border-color: rgba(102, 126, 234, 0.2);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+[data-theme="dark"] .testimonial-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
 }
 
 .testimonial-rating {
@@ -610,12 +625,20 @@
   overflow: hidden;
 }
 
+[data-theme="dark"] .testimonial-content {
+  color: var(--text-dark-primary);
+}
+
 .testimonial-author {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .testimonial-author {
+  border-top-color: var(--border-color);
 }
 
 .testimonial-avatar {
@@ -666,8 +689,12 @@
   gap: var(--spacing-md);
   padding-top: var(--spacing-md);
   margin-top: var(--spacing-md);
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-color);
   justify-content: center;
+}
+
+[data-theme="dark"] .testimonial-actions {
+  border-top-color: var(--border-color);
 }
 
 .testimonial-like-btn,
@@ -676,8 +703,8 @@
   align-items: center;
   gap: 4px;
   padding: 6px 12px;
-  border: 2px solid var(--gray-200);
-  background: white;
+  border: 2px solid var(--border-color);
+  background: var(--bg-primary);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s;
@@ -686,12 +713,26 @@
   color: var(--text-secondary);
 }
 
+[data-theme="dark"] .testimonial-like-btn,
+[data-theme="dark"] .testimonial-comment-btn {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-dark-secondary);
+}
+
 .testimonial-like-btn:hover:not(:disabled),
 .testimonial-comment-btn:hover {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.05);
-  color: #667eea;
+  border-color: var(--primary);
+  background: rgba(102, 126, 234, 0.1);
+  color: var(--primary);
   transform: translateY(-2px);
+}
+
+[data-theme="dark"] .testimonial-like-btn:hover:not(:disabled),
+[data-theme="dark"] .testimonial-comment-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: var(--primary);
+  color: var(--primary-light);
 }
 
 .testimonial-like-btn:disabled {
@@ -699,14 +740,29 @@
   cursor: not-allowed;
 }
 
+[data-theme="dark"] .testimonial-like-btn:disabled {
+  opacity: 0.4;
+}
+
 .testimonial-like-btn.liked {
-  border-color: #ef4444;
+  border-color: var(--danger);
   background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
+  color: var(--danger);
+}
+
+[data-theme="dark"] .testimonial-like-btn.liked {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: var(--danger);
+  color: #ff6b6b;
 }
 
 .testimonial-like-btn.liked:hover:not(:disabled) {
   background: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme="dark"] .testimonial-like-btn.liked:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: var(--danger);
 }
 
 .like-icon {
@@ -745,9 +801,14 @@
 .comment-item {
   padding: var(--spacing-sm) var(--spacing-md);
   margin-bottom: var(--spacing-sm);
-  background: var(--gray-50);
+  background: var(--bg-secondary);
   border-radius: 10px;
-  border-left: 3px solid #667eea;
+  border-left: 3px solid var(--primary);
+}
+
+[data-theme="dark"] .comment-item {
+  background: rgba(102, 126, 234, 0.1);
+  border-left-color: var(--primary);
 }
 
 .comment-author {
@@ -788,9 +849,17 @@
   font-size: 0.8125rem;
 }
 
+[data-theme="dark"] .comment-name {
+  color: var(--text-dark-primary);
+}
+
 .comment-date {
   font-size: 0.6875rem;
   color: var(--text-secondary);
+}
+
+[data-theme="dark"] .comment-date {
+  color: var(--text-dark-secondary);
 }
 
 .comment-content {
@@ -801,12 +870,20 @@
   padding-left: 36px;
 }
 
+[data-theme="dark"] .comment-content {
+  color: var(--text-dark-secondary);
+}
+
 .no-comments {
   text-align: center;
   color: var(--text-secondary);
   font-style: italic;
   padding: var(--spacing-lg);
   font-size: 0.875rem;
+}
+
+[data-theme="dark"] .no-comments {
+  color: var(--text-dark-secondary);
 }
 
 .comment-form {
@@ -816,19 +893,44 @@
 .comment-form textarea {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  border: 2px solid var(--gray-200);
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   font-size: 0.875rem;
   font-family: inherit;
   resize: vertical;
   transition: all 0.3s;
   min-height: 60px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .comment-form textarea {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-dark-primary);
+}
+
+.comment-form textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .comment-form textarea::placeholder {
+  color: var(--text-dark-secondary);
+  opacity: 0.6;
 }
 
 .comment-form textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] .comment-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  background: var(--bg-primary);
 }
 
 .comment-form-actions {
@@ -841,6 +943,10 @@
 .char-count {
   font-size: 0.75rem;
   color: var(--text-secondary);
+}
+
+[data-theme="dark"] .char-count {
+  color: var(--text-dark-secondary);
 }
 
 .btn-sm {

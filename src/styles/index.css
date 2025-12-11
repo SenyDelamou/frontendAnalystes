@@ -26,25 +26,21 @@
   --gray-800: #1f2937;
   --gray-900: #111827;
   
-  /* Backgrounds */
+  /* Backgrounds - Light theme (default) */
   --bg-primary: #ffffff;
   --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
   --bg-dark: #111827;
   
-  /* Dark mode backgrounds */
-  --bg-dark-primary: #1a1a1a;
-  --bg-dark-secondary: #2d2d2d;
-  --bg-dark-tertiary: #3a3a3a;
-  
-  /* Text */
+  /* Text - Light theme (default) */
   --text-primary: #111827;
   --text-secondary: #6b7280;
   --text-light: #9ca3af;
+  --text-inverse: #ffffff;
   
-  /* Dark mode text */
-  --text-dark-primary: #ffffff;
-  --text-dark-secondary: #d1d5db;
-  --text-dark-light: #9ca3af;
+  /* Borders - Light theme */
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-color-hover: rgba(0, 0, 0, 0.12);
   
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -61,7 +57,7 @@
   --radius-xl: 1rem;
   --radius-full: 9999px;
   
-  /* Shadows */
+  /* Shadows - Light theme */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
@@ -70,6 +66,36 @@
   /* Fonts */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-heading: 'Poppins', system-ui, sans-serif;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+  /* Backgrounds - Dark theme */
+  --bg-primary: #1f2937;
+  --bg-secondary: #111827;
+  --bg-tertiary: #0a1628;
+  --bg-dark: #111827;
+  
+  /* Text - Dark theme */
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-light: #9ca3af;
+  --text-inverse: #111827;
+  
+  /* Borders - Dark theme */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color-hover: rgba(255, 255, 255, 0.2);
+  
+  /* Shadows - Dark theme (plus subtiles) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6);
 }
 
 * {
@@ -87,6 +113,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 .app {
@@ -242,11 +269,9 @@ a {
   background: var(--bg-primary);
   border-radius: 16px;
   padding: var(--spacing-xl);
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base) cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-color);
   animation: fadeInUp 0.6s ease-out;
   position: relative;
   overflow: hidden;
@@ -269,11 +294,9 @@ a {
 }
 
 .card:hover {
-  box-shadow: 
-    0 10px 25px rgba(0, 0, 0, 0.08),
-    0 4px 10px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
-  border-color: rgba(102, 126, 234, 0.2);
+  border-color: var(--primary);
 }
 
 /* Container */
@@ -584,11 +607,30 @@ a {
   animation-delay: 0.4s;
 }
 
-/* Smooth transitions */
+/* Smooth transitions - Amélioré pour les changements de thème */
 * {
   transition-property: color, background-color, border-color, transform, opacity, box-shadow;
-  transition-duration: 0.2s;
+  transition-duration: var(--transition-fast);
   transition-timing-function: ease-in-out;
+}
+
+/* Transitions plus fluides pour les changements de thème */
+html {
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Éviter les transitions sur les éléments animés */
+.animate-fade-in,
+.animate-fade-in-up,
+.animate-fade-in-down,
+.animate-slide-in,
+.animate-slide-in-right,
+.animate-scale-in,
+.animate-bounce,
+.animate-pulse,
+.animate-float,
+.animate-rotate {
+  transition: none !important;
 }
 
 /* Reduce motion for users who prefer it */

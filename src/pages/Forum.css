@@ -618,11 +618,27 @@
 .topic-tags .tag {
   padding: 4px 10px;
   background: rgba(102, 126, 234, 0.1);
-  color: #667eea;
+  color: var(--primary);
   border-radius: 6px;
   font-size: 0.75rem;
   font-weight: 600;
   border: 1px solid rgba(102, 126, 234, 0.2);
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .topic-tags .tag {
+  background: rgba(102, 126, 234, 0.2);
+  color: var(--primary-light);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.topic-tags .tag:hover {
+  background: rgba(102, 126, 234, 0.2);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .topic-tags .tag:hover {
+  background: rgba(102, 126, 234, 0.3);
 }
 
 .topic-footer {

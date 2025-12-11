@@ -1007,6 +1007,15 @@
     font-size: clamp(0.875rem, 1vw, 1rem);
   }
 
+  .mobile-menu-theme-selector {
+    display: flex;
+    justify-content: center;
+    padding: clamp(var(--spacing-sm), 1.2vw, var(--spacing-md)) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: clamp(var(--spacing-sm), 1.2vw, var(--spacing-md)) 0;
+  }
+
   .brand-text {
     font-size: 1.125rem;
   }

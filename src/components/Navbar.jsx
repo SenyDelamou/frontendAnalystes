@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import { useFavorites } from '../context/FavoritesContext'
 import GlobalSearch from './GlobalSearch'
+import ThemeSelector from './ThemeSelector'
 import { getFilteredNavbarLinks, getMobileNavbarLinks, getFilteredActionButtons } from '../config/navbarConfig'
 import './Navbar.css'
 
@@ -16,7 +17,6 @@ const Navbar = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { user, logout, isAuthenticated } = useAuth()
-  const { theme, toggleTheme } = useTheme()
   const { getFavoritesCount } = useFavorites()
 
   const isActive = (path) => location.pathname === path
@@ -196,6 +196,9 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-actions">
+          {/* Sélecteur de thème */}
+          <ThemeSelector />
+          
           {/* Boutons d'action configurables (ajoutés automatiquement depuis navbarConfig) */}
           {getFilteredActionButtons(isAuthenticated).map((button, index) => {
             if (button.type === 'link') {
@@ -451,6 +454,9 @@ const Navbar = () => {
             {link.label}
           </Link>
         ))}
+        <div className="mobile-menu-theme-selector">
+          <ThemeSelector />
+        </div>
         {isAuthenticated ? (
           <>
             {user?.role === 'admin' && (

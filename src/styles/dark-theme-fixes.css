@@ -1,0 +1,358 @@
+/* ============================================
+   CORRECTIONS GLOBALES POUR LE MODE SOMBRE
+   ============================================ */
+
+/* Amélioration des cartes en mode sombre */
+[data-theme="dark"] .card {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Amélioration des boutons en mode sombre */
+[data-theme="dark"] .btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-gradient-end) 100%);
+  color: white;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-gradient-end) 0%, var(--primary) 100%);
+}
+
+[data-theme="dark"] .btn-outline {
+  border-color: var(--primary);
+  color: var(--primary-light);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-gradient-end) 100%);
+  color: white;
+}
+
+[data-theme="dark"] .btn-ghost {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Amélioration des inputs et formulaires */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+  border-color: var(--primary);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Amélioration des liens */
+[data-theme="dark"] a {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] a:hover {
+  color: var(--primary-light);
+}
+
+/* Amélioration des badges */
+[data-theme="dark"] .badge {
+  background: rgba(102, 126, 234, 0.2);
+  color: var(--text-secondary);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+[data-theme="dark"] .badge-primary {
+  background: var(--primary);
+  color: white;
+}
+
+[data-theme="dark"] .badge-success {
+  background: var(--secondary);
+  color: white;
+}
+
+/* Amélioration des séparateurs et bordures */
+[data-theme="dark"] hr,
+[data-theme="dark"] .divider {
+  border-color: var(--border-color);
+}
+
+/* Amélioration des modales */
+[data-theme="dark"] .modal,
+[data-theme="dark"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .modal-content {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Amélioration des tooltips */
+[data-theme="dark"] .tooltip {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Amélioration des dropdowns */
+[data-theme="dark"] .dropdown-menu {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Amélioration des tables */
+[data-theme="dark"] table {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] td {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Amélioration des code blocks */
+[data-theme="dark"] code,
+[data-theme="dark"] pre {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Amélioration des blockquotes */
+[data-theme="dark"] blockquote {
+  border-left-color: var(--primary);
+  background: rgba(102, 126, 234, 0.1);
+  color: var(--text-secondary);
+}
+
+/* Amélioration des alertes */
+[data-theme="dark"] .alert {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .alert-success {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--secondary);
+}
+
+[data-theme="dark"] .alert-error,
+[data-theme="dark"] .alert-danger {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--danger);
+}
+
+[data-theme="dark"] .alert-warning {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .alert-info {
+  background: rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.3);
+  color: var(--primary-light);
+}
+
+/* Amélioration des progress bars */
+[data-theme="dark"] .progress {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .progress-bar {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-gradient-end) 100%);
+}
+
+/* Amélioration des spinners */
+[data-theme="dark"] .spinner {
+  border-color: rgba(102, 126, 234, 0.2);
+  border-top-color: var(--primary);
+}
+
+/* Amélioration des images avec bordures */
+[data-theme="dark"] img {
+  opacity: 0.95;
+}
+
+[data-theme="dark"] img:hover {
+  opacity: 1;
+}
+
+/* Amélioration des éléments avec background blanc hardcodé */
+[data-theme="dark"] [style*="background: white"],
+[data-theme="dark"] [style*="background: #fff"],
+[data-theme="dark"] [style*="background: #ffffff"] {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] [style*="color: black"],
+[data-theme="dark"] [style*="color: #000"],
+[data-theme="dark"] [style*="color: #000000"] {
+  color: var(--text-primary) !important;
+}
+
+/* Amélioration des éléments avec rgba(255, 255, 255, ...) */
+[data-theme="dark"] [style*="rgba(255, 255, 255, 0.9)"],
+[data-theme="dark"] [style*="rgba(255, 255, 255, 0.8)"] {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Amélioration des gradients en mode sombre */
+[data-theme="dark"] [style*="linear-gradient"][style*="rgba(255, 255, 255"] {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%) !important;
+}
+
+/* Amélioration des ombres en mode sombre */
+[data-theme="dark"] [style*="box-shadow"][style*="rgba(0, 0, 0, 0.1)"] {
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Amélioration spécifique pour les éléments avec inset */
+[data-theme="dark"] [style*="inset"][style*="rgba(255, 255, 255"] {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Amélioration des éléments avec backdrop-filter */
+[data-theme="dark"] [style*="backdrop-filter"] {
+  background: rgba(31, 41, 55, 0.8) !important;
+}
+
+/* Amélioration des éléments avec border blanc */
+[data-theme="dark"] [style*="border"][style*="white"],
+[data-theme="dark"] [style*="border"][style*="#fff"] {
+  border-color: var(--border-color) !important;
+}
+
+/* Amélioration générale pour tous les éléments avec couleur de texte */
+[data-theme="dark"] * {
+  /* S'assurer que les couleurs héritent correctement */
+  border-color: inherit;
+}
+
+/* Correction pour les éléments avec opacity */
+[data-theme="dark"] [style*="opacity: 0.8"],
+[data-theme="dark"] [style*="opacity: 0.9"] {
+  opacity: 0.9 !important;
+}
+
+/* Amélioration des éléments avec text-shadow */
+[data-theme="dark"] [style*="text-shadow"] {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Corrections spécifiques pour les composants avec background white */
+[data-theme="dark"] .brand-icon-container {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .toast {
+  background: var(--bg-primary) !important;
+  box-shadow: var(--shadow-xl) !important;
+}
+
+[data-theme="dark"] .toast-success {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, var(--bg-primary) 100%) !important;
+}
+
+[data-theme="dark"] .toast-error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, var(--bg-primary) 100%) !important;
+}
+
+[data-theme="dark"] .toast-info {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, var(--bg-primary) 100%) !important;
+}
+
+[data-theme="dark"] .toast-warning {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, var(--bg-primary) 100%) !important;
+}
+
+[data-theme="dark"] .toast-close:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .video-progress-handle,
+[data-theme="dark"] .volume-slider::-webkit-slider-thumb,
+[data-theme="dark"] .volume-slider::-moz-range-thumb {
+  background: var(--bg-primary) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .user-menu-dropdown,
+[data-theme="dark"] .notification-dropdown,
+[data-theme="dark"] .theme-selector-dropdown {
+  background: var(--bg-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .coaching-chat-container {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .chat-input-container {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .expertise-questionnaire-modal,
+[data-theme="dark"] .course-recommendations,
+[data-theme="dark"] .confirm-modal-content {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .questionnaire-option,
+[data-theme="dark"] .recommendation-card {
+  background: var(--bg-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .questionnaire-option:hover,
+[data-theme="dark"] .recommendation-card:hover {
+  background: rgba(102, 126, 234, 0.1) !important;
+  border-color: var(--primary) !important;
+}
+
