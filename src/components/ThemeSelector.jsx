@@ -1,13 +1,17 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback, useId } from 'react'
 import { useTheme, THEMES } from '../context/ThemeContext'
 import './ThemeSelector.css'
 
 const ThemeSelector = () => {
   const { theme, effectiveTheme, changeTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
+  const [focusedIndex, setFocusedIndex] = useState(-1)
   const dropdownRef = useRef(null)
+  const buttonRef = useRef(null)
+  const optionRefs = useRef([])
+  const dropdownId = useId()
 
-  const themes = [
+  const themeOptions = useMemo(() => ([
     {
       id: THEMES.LIGHT,
       name: 'Clair',
@@ -45,7 +49,7 @@ const ThemeSelector = () => {
         </svg>
       )
     }
-  ]
+  ]), [])
 
   // Fermer le dropdown quand on clique en dehors
   useEffect(() => {
@@ -61,20 +65,84 @@ const ThemeSelector = () => {
     }
   }, [isOpen])
 
-  const currentTheme = themes.find(t => t.id === theme) || themes[0]
+  useEffect(() => {
+    if (!isOpen && buttonRef.current) {
+      buttonRef.current.focus()
+    }
+  }, [isOpen])
 
-  const handleThemeChange = (newTheme) => {
+  useEffect(() => {
+    if (!isOpen) return
+
+    const nextIndex = themeOptions.findIndex(option => option.id === theme)
+    setFocusedIndex(nextIndex >= 0 ? nextIndex : 0)
+  }, [isOpen, theme, themeOptions])
+
+  useEffect(() => {
+    if (isOpen && focusedIndex >= 0) {
+      optionRefs.current[focusedIndex]?.focus()
+    }
+  }, [isOpen, focusedIndex])
+
+  useEffect(() => {
+    if (!isOpen) return undefined
+
+    const handleKeyDown = (event) => {
+      if (!isOpen) return
+
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        setIsOpen(false)
+        return
+      }
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault()
+        setFocusedIndex(prev => {
+          const next = prev + 1 >= themeOptions.length ? 0 : prev + 1
+          return next
+        })
+      }
+
+      if (event.key === 'ArrowUp') {
+        event.preventDefault()
+        setFocusedIndex(prev => {
+          const next = prev - 1 < 0 ? themeOptions.length - 1 : prev - 1
+          return next
+        })
+      }
+
+      if ((event.key === 'Enter' || event.key === ' ') && focusedIndex >= 0) {
+        event.preventDefault()
+        const focusedTheme = themeOptions[focusedIndex]
+        if (focusedTheme) {
+          handleThemeChange(focusedTheme.id)
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, focusedIndex, themeOptions])
+
+  const currentTheme = themeOptions.find(t => t.id === theme) || themeOptions[0]
+
+  const handleThemeChange = useCallback((newTheme) => {
     changeTheme(newTheme)
     setIsOpen(false)
-  }
+  }, [changeTheme])
 
   return (
     <div className="theme-selector" ref={dropdownRef}>
       <button
+        ref={buttonRef}
         className="theme-selector-button"
-        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+        onClick={() => setIsOpen(prev => !prev)}
         aria-label="Changer le thème"
         aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-controls={`${dropdownId}-menu`}
         title={`Thème: ${currentTheme.name}`}
       >
         <span className="theme-selector-icon">
@@ -83,16 +151,20 @@ const ThemeSelector = () => {
       </button>
 
       {isOpen && (
-        <div className="theme-selector-dropdown">
+        <div className="theme-selector-dropdown" role="menu" id={`${dropdownId}-menu`}>
           <div className="theme-selector-header">
             <span>Choisir un thème</span>
           </div>
-          <div className="theme-selector-options">
-            {themes.map((themeOption) => (
+          <div className="theme-selector-options" role="none">
+            {themeOptions.map((themeOption, index) => (
               <button
                 key={themeOption.id}
+                ref={el => { optionRefs.current[index] = el }}
                 className={`theme-selector-option ${theme === themeOption.id ? 'active' : ''}`}
+                type="button"
                 onClick={() => handleThemeChange(themeOption.id)}
+                role="menuitemradio"
+                aria-checked={theme === themeOption.id}
                 aria-label={`Thème ${themeOption.name}`}
               >
                 <span className="theme-option-icon">{themeOption.icon}</span>
@@ -110,7 +182,7 @@ const ThemeSelector = () => {
           {theme === THEMES.AUTO && (
             <div className="theme-selector-info">
               <span className="theme-info-text">
-                Utilise la préférence système ({effectiveTheme === 'dark' ? 'Sombre' : 'Clair'})
+                Utilise la préférence système ({effectiveTheme === THEMES.DARK ? 'Sombre' : 'Clair'})
               </span>
             </div>
           )}
